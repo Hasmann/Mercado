@@ -1,0 +1,92 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <form class="product-form" action="/Mercado/Merchant/edit-product" method="POST" enctype="multipart/form-data" >
+            <% if(errorMessage) {%>
+                <div class=" error" ><%= errorMessage%></div> 
+                <%}%>
+                <div class=" error1" ><%= errorMessage%></div> 
+           
+                <div class="form-control">
+                    <label for="title">Name</label>
+                    <input value="<%=product.name%>"  type="text" name="name" id="title">
+                </div>
+        
+                <div  class="form-control">
+                    <label for="Category">Category</label>
+                    <div class="selectCustom">
+                        <select name="category" id="category" >
+                          <option value="<%=product.categorye%>"><%=product.category%></option>
+                          <option value="Beauty and personal care">Beauty and personal care</option>
+                          <option value="Books and media">Books and media</option>
+                          <option value="Clothing and fashion">Clothing and fashion</option>
+                          <option value="Electronics">Electronics</option>
+                          <option value="Furniture and home decor">Furniture and home decor</option>
+                          <option value="Health and wellness">Health and wellness</option>
+                          <option value="Home and garden">Home and garden</option>
+                          <option value="Musical instruments">Musical instruments</option>
+                          <option value="Sports and outdoor gear">Sports and outdoor gear</option>
+                          <option value="Toys and games">Toys and games</option>                             
+                        </select>
+                      </div>
+                </div>
+        
+                <div class="form-control">
+                    <label for="image">Image</label>
+                    <input value="<%=product.productImage.split("/")[1]%>" type="file" name="imageUrl" id="imageUrl">
+                </div>
+              
+        
+                <div class="form-control">
+                    <label for="price">Price</label>
+                    <input value="<%=product.price%>"  type="number" name="price" id="price" step="0.01">
+                </div>
+                <div class="form-control">
+                    <label for="description">Summary</label>
+                    <textarea  name="summary" id="summary" rows="5"><%=product.summary%></textarea>
+                </div>
+        
+                <div class="form-control">
+                    <label for="description">Description</label>
+                    <textarea   name="description" id="description" rows="5"><%=product.description%></textarea>
+                </div>
+        
+                <div class="form-control">
+                    <label for="stockQuantity">StockQuantity</label>
+                    <input value="<%=product.stockQuantity%>" type="number" name="stockQuantity" id="stockQuantity">
+                </div>
+           
+                <!-- <div class="form-control">
+
+
+                <label for="title">Name</label>
+                <input class="<%= wrongInput.find((el)=>{return el.param =='name'})? 'inputError':'' %>" type="text" name="title" id="title" value="<% if(userValues){%> <%=userValues.title %> <%} if (editing) { %><%= product.title %><% } else{%> <%=""%> <%} %>">
+            </div>
+            <div class="form-control">
+                <label for="image">Image</label>
+                <input class="<%= wrongInput.find((el)=>{return el.param =='image'})? 'inputError':'' %>" 
+                type="file" name="productImage" id="productImage" value="<% if(userValues){%> <%=userValues.image %> <%} if (editing) { %><%= product.image %><% }  else{%> <%=""%> <%} %>">
+            </div>
+            <div class="form-control">
+                <label for="price">Price</label>
+                <input class="<%= wrongInput.find((el)=>{return el.param =='price'})? 'inputError':'' %>"
+                 type="number" name="price" id="price"  value="<% if (editing) { %><%=product.price%><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="description">Description</label>
+                <textarea  class="<%= wrongInput.find((el)=>{return el.param =='description'})? 'inputError':'' %>"name="description" id="description" rows="5"><% if(userValues){%> <%=userValues.description %> <%} if (editing) { %><%= product.description %><% }  else{%> <%=""%> <%} %></textarea>
+            </div> -->
+            <% if (editing) { %>
+                <input type="hidden" value="<%= product._id %>" name="productId">
+            <% } %>
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+            <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add Product<% } %></button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

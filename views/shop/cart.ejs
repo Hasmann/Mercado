@@ -1,0 +1,33 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (products.length > 0) { %>
+                <ul class="cart__item-list">
+                    <% products.forEach(p => { %>
+                        <li class="cart__item">
+                            <h1><%= p.productId.name %></h1>
+                            <h2>Quantity: <%= p.quantity %></h2>
+                            <form>
+                                <input class="csrf" type="hidden" value="<%=csrfToken%>">
+                                <input class="productId" type="hidden" value="<%= p.productId._id %>">
+                                <button class="btn danger" type="submit" onclick="deleteFromCart()">Delete</button>
+                            </form>
+                        </li>
+                    <% }) %>
+                </ul>
+                <div class="centered">
+                    <a href="/Mercado/User/check-out"><button class="btn">Check-Out</button></a>
+                </div>
+                
+            <% } else { %>
+                <h1>No Products in Cart!</h1>
+            <% } %>
+        </main>
+    
+        <%- include('../includes/end.ejs') %>
+        <script defer src="/js/deletefromCart.js"></script>
+      

@@ -1,0 +1,178 @@
+<div class="backdrop"></div>
+<header class="main-header">
+  <button id="side-menu-toggle">Menu</button>
+  <nav class="main-header__nav">
+    <ul class="main-header__item-list">
+      <li style="display: flex; align-items: center" class="main-header__item">
+        <a href="/Mercado/Home">
+          <h3 style="font-size: 30px;font-family: 'Poiret One', cursive;" class="logo">MERCADO</h3>
+        </a>
+      </li>
+      <% if (!isAuthenticated || isAuthenticated.role == "user") {%> 
+      <li style="display: flex; align-items: center" class="main-header__item">
+        <a class="<%= path === '/' ? 'active' : '' %>" href="/Mercado/Merchant/signUp"
+          >Sell on Mercado</a
+        >
+      </li>
+
+      <li class="main-header__item">
+        <input
+          class="navInput"
+          type="text"
+          name="search"
+          placeholder="Search Products"
+        />
+      </li>
+
+      <li class="searchButtonList">
+        <div>
+          <span class="material-symbols-outlined searchButton"> search </span>
+        </div>
+      </li>
+   <% }%>
+      <% if (isAuthenticated && isAuthenticated.role ==="merchant") { %>
+
+      <li style="display: flex;justify-self: center;align-items: center;" class="main-header__item">
+        <a
+          class="<%= path === '/admin/add-product' ? 'active' : '' %>"
+          href="/Mercado/Merchant/add-product"
+          >Add Product
+        </a>
+      </li>
+      <li  style="display: flex;justify-self: center;align-items: center;" class="main-header__item">
+        <a
+          class="<%= path === '/admin/products' ? 'active' : '' %>"
+          href="/Mercado/Merchant/allProducts"
+          >My Products
+        </a>
+      </li>
+      <% } %>
+    </ul>
+    <ul class="main-header__item-list">
+      <% if (!isAuthenticated) { %>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/login' ? 'active' : '' %>"
+          href="/Mercado/User/Login"
+          >Login</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/signup' ? 'active' : '' %>"
+          href="/Mercado/User/signUp"
+          >Signup</a
+        >
+      </li>
+
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/cart' ? 'active' : '' %>"
+          href="/Mercado/User/cart"
+          ><span class="material-symbols-outlined"> shopping_cart </span></a
+        >
+      </li>
+
+      <% } else { %>
+      <!-- <li class="">
+        <img
+          style="height: 30px; border-radius: 100%"
+          src=""
+        />
+      </li> -->
+
+      <li class="main-header__item">
+        <span
+          style="
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+              sans-serif;
+          "
+        ></span>
+      </li>
+      <li class="main-header__item">
+        <div class="dropdown">
+          <a
+            class="<%= path === '/cart dropdown' ? 'active' : '' %>"
+            href="http://localhost:2007/api/v1/mercado/user/signUp"
+            ><span
+            >Accounts & Lists &#x2193
+            </span></a
+          >
+          <div class="dropdown-content">
+            <a href="/Mercado/User/Orders">Orders</a>
+            <a href="#">wishlist</a>
+            <a class="material-symbols-outlined" href="/Mercado/User/cart">shopping_cart</a>
+          </div>
+        </div>
+      </li>
+      <li class="main-header__item">
+          <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+          <button type="submit" onclick="logout()">Logout</button>
+ 
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/cart' ? 'active' : '' %>"
+          href="/Mercado/User/cart"
+          ><span class="material-symbols-outlined"> shopping_cart </span></a
+        >
+      </li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
+
+<nav class="mobile-nav">
+  <ul class="mobile-nav__item-list">
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+    </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/products' ? 'active' : '' %>" href="/products"
+        >Products</a
+      >
+    </li>
+    <% if (isAuthenticated) { %>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+    </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders"
+        >Orders</a
+      >
+    </li>
+    <li class="mobile-nav__item">
+      <a
+        class="<%= path === '/admin/add-product' ? 'active' : '' %>"
+        href="/Mercado/Merchant/add-product"
+        >Add Product
+      </a>
+    </li>
+    <li class="mobile-nav__item">
+      <a
+        class="<%= path === '/admin/products' ? 'active' : '' %>"
+        href="/Mercado/Merchant/allProducts"
+        >My Products
+      </a>
+    </li>
+    <% } %> <% if (!isAuthenticated) { %>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/login' ? 'active' : '' %>" href="/Mercado/User/Login"
+        >Login</a
+      >
+    </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/signup' ? 'active' : '' %>" href="/Mercado/User/signUp"
+        >Signup</a
+      >
+    </li>
+    <% } else { %>
+    <li class="mobile-nav__item">
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+        <button type="submit"onclick="logout()">Logout</button>
+
+    </li>
+    <% } %>
+  </ul>
+</nav>

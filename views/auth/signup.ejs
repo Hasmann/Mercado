@@ -1,0 +1,70 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+
+
+    <main>
+        <div class="userMainNav">
+            <div class="nonactiveUserNav"><b><a href="http://localhost:2007/Mercado/User/signUp">USER</a></b></div> 
+            <div class="activeUserNav"><b>MERCHANT</b></div>
+          </div>
+                   
+          <div style="text-align:center" class="login-form">
+            <% if(errorMessage) {%>
+                <div class=" error" ><%= errorMessage%></div> 
+                <%}%>
+                <div class=" error1" ><%= errorMessage%></div> 
+                <div class="form-control">
+                    <label for="fullName">fullName</label>
+                    <input type="text" name="fullName" id="fullName">
+                </div>
+                <div class="form-control">
+                    <label for="VirtualStoreName">VirtualStoreName</label>
+                    <input type="text" name="VirtualStoreName" id="VirtualStoreName">
+                </div>
+              
+                <div  class="form-control">
+                    <label for="Category">Category</label>
+                    <div   class="selectCustom">
+                        <select name="Category" id="Category" >
+                          <option value=" ">Select Category</option>
+                          <option value="Beauty and personal care">Beauty and personal care</option>
+                          <option value="Books and media">Books and media</option>
+                          <option value="Clothing and fashion">Clothing and fashion</option>
+                          <option value="Electronics">Electronics</option>
+                          <option value="Furniture and home decor">Furniture and home decor</option>
+                          <option value="Health and wellness">Health and wellness</option>
+                          <option value="Home and garden">Home and garden</option>
+                          <option value="Musical instruments">Musical instruments</option>
+                          <option value="Sports and outdoor gear">Sports and outdoor gear</option>
+                          <option value="Toys and games">Toys and games</option>                             
+                        </select>
+                      </div>
+                      
+                </div>
+
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input style="display: inline;" type="password" name="password" class="passwordchange" id="passwordId">
+            </div>
+            <div class="form-control">
+                <label for="password">Confirm-Password</label>
+                <input style="display: inline;" type="password" name="passwordConfirm" class="passwordchange" id="passwordConfirm">
+                <i class="far fa-eye" id="passwordToggle" style="cursor: pointer;display: inline;"></i>
+            </div>
+            <input type="hidden" class="csrf" name="_csrf" value="<%=csrfToken%>">
+            
+            <button style="text-align: center;" class="btn" type="submit" onclick="merchantSignUp()">SignUp</button>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>
+<script src="/js/merchantSignUp.js"></script>

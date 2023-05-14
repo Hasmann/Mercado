@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+
+
+    <main>
+        <div class="userMainNav">
+            <div class="nonactiveUserNav"><a href="http://localhost:2007/Mercado/User/login"><b>USER</b></a></div> 
+            <div class="activeUserNav"><b>MERCHANT</b></div>
+          </div>
+        
+        <div style="text-align:center" class="login-form">
+            <% if(errorMessage) {%>
+                <div class=" error" ><%= errorMessage%></div> 
+                <%}%>
+                <div class=" error1" ><%= errorMessage%></div> 
+            <div class="form-control">
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div class="form-control">
+                <a style="outline:none;text-decoration:none;" href="/Mercado/Users/forgotPassword">Forgot-Password?</a>
+            </div>
+            <input type="hidden" class="csrf" name="_csrf" value="<%=csrfToken%>">
+            
+            <button style="text-align: center;" class="btn" type="submit" onclick="userLogin()">Login</button>
+        </div>
+    </main>
+<%- include('../includes/end.ejs') %>
+<script src="/js/merchantLogin.js"></script>

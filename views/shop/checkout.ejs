@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/cart.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (products.length > 0) { %>
+                <ul class="cart__item-list">
+                    <% products.forEach(p => { %>
+                        <li class="cart__item">
+                            <h1><%= p.productId.name %></h1>
+                            <h2>Quantity: <%= p.quantity %></h2>
+                                <input type="hidden"  value="<%=csrfToken%>">
+                                <input type="hidden" value="<%= p.productId._id %>">
+                                <button class="btn danger" type="submit">Delete</button>                    
+                        </li>
+                    <% }) %>
+                </ul>
+                <hr>
+                <div class="centered">
+                    <!-- <form action="/create-order" method="POST">
+                        <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                        <button type="submit" class="btn">Order Now!</button>
+                    </form> -->
+                </div>
+                <div class="centered">
+                    <h1>TOTAL:$<%=total%></h1>
+                </div>
+                <div class="centered"> 
+                <form action="/api/v1/create-order" method="POST">
+                  <script
+                      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="pk_test_51LlGbIGhTAOgsQWyKXAtnmmgzA0ky65Xweuh6DVSiVkkGvKRAY3mEvWgOmoK66CnVLyadk9AfDAbzyzCDcGchyy300Rt6IynUL"
+                      data-amount="<%= total * 100 %>"
+                      data-name="Your Order"
+                      data-description="All the items you ordered"
+                      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                      data-locale="auto"
+                      data-currency="usd">
+                    </script>
+                       <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                </form>
+              </div>
+            <% } else { %>
+                <h1>No Products in Cart!</h1>
+            <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>
